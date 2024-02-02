@@ -1,0 +1,5 @@
+REDMINE_DB_POSTGRES: hexlet-postgres-01-do-user-15554316-0.c.db.ondigitalocean.com
+REDMINE_DB_PORT: "25060"
+REDMINE_DB_USERNAME: doadmin
+REDMINE_DB_DATABASE: defaultdb
+REDMINE_DB_PASSWORD: "{{ vault_REDMINE_DB_PASSWORD }}"
