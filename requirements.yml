@@ -1,2 +1,4 @@
 roles:
   - name: datadog.datadog
+collections:
+  i name: community.docker
