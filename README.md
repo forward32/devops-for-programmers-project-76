@@ -9,4 +9,4 @@
 
 ## Команды запуска
 - `make setup` - используя `ansible`, устанавливает `python docker`, необходимый далее
-- `make redmine` - используя `ansible`, запускает образ `redmine`, доступный по адресу https://forward32.online
+- `make start` - используя `ansible`, запускает образ `redmine`, доступный по адресу https://forward32.online, а также устанавливает datadog-агент с настроенными http-чеком.
