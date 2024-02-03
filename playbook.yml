@@ -1,5 +1,4 @@
 - hosts: all
-
   tasks:
     - apt:
         name: python3-pip
@@ -7,28 +6,32 @@
         cache_valid_time: 604800 # 1 week
       tags:
         - setup
-
     - name: Ignore PEP 668 because it's silly.
       ansible.builtin.file:
         path: /usr/lib/python3.11/EXTERNALLY-MANAGED
         state: absent
-
+      tags:
+        - setup
     - pip:
         name: docker
       tags:
         - setup
-
     - name: start redmine container
       community.docker.docker_container:
         name: redmine
         image: redmine
         published_ports: 3000:3000
         env:
-          REDMINE_DB_POSTGRES: "{{ REDMINE_DB_POSTGRES }}"
-          REDMINE_DB_PORT: "{{ REDMINE_DB_PORT }}"
-          REDMINE_DB_USERNAME: "{{ REDMINE_DB_USERNAME }}"
-          REDMINE_DB_DATABASE: "{{ REDMINE_DB_DATABASE }}"
-          REDMINE_DB_PASSWORD: "{{ REDMINE_DB_PASSWORD }}"
+          REDMINE_DB_POSTGRES: "{{ redmine_db_postgres }}"
+          REDMINE_DB_PORT: "{{ redmina_db_port }}"
+          REDMINE_DB_USERNAME: "{{ redmina_db_username }}"
+          REDMINE_DB_DATABASE: "{{ redmina_db_database }}"
+          REDMINE_DB_PASSWORD: "{{ redmina_db_password }}"
       become: yes
-      tags:
-        - redmine
+
+- hosts: webservers
+  tasks:
+    - name: start datadog
+      import_role:
+        name: datadog.datadog
+      become: yes
