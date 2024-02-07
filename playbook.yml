@@ -1,6 +1,7 @@
 - hosts: all
   tasks:
-    - apt:
+    - name: pythin3-pip
+      apt:
         name: python3-pip
         update_cache: yes
         cache_valid_time: 604800 # 1 week
@@ -12,7 +13,8 @@
         state: absent
       tags:
         - setup
-    - pip:
+    - name: pip
+      pip:
         name: docker
       tags:
         - setup
@@ -23,10 +25,10 @@
         published_ports: 3000:3000
         env:
           REDMINE_DB_POSTGRES: "{{ redmine_db_postgres }}"
-          REDMINE_DB_PORT: "{{ redmina_db_port }}"
-          REDMINE_DB_USERNAME: "{{ redmina_db_username }}"
-          REDMINE_DB_DATABASE: "{{ redmina_db_database }}"
-          REDMINE_DB_PASSWORD: "{{ redmina_db_password }}"
+          REDMINE_DB_PORT: "{{ redmine_db_port }}"
+          REDMINE_DB_USERNAME: "{{ redmine_db_username }}"
+          REDMINE_DB_DATABASE: "{{ redmine_db_database }}"
+          REDMINE_DB_PASSWORD: "{{ redmine_db_password }}"
       become: yes
 
 - hosts: webservers
