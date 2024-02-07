@@ -1,6 +1,7 @@
 - hosts: all
   tasks:
-    - apt:
+    - name: pythin3-pip
+      apt:
         name: python3-pip
         update_cache: yes
         cache_valid_time: 604800 # 1 week
@@ -12,7 +13,8 @@
         state: absent
       tags:
         - setup
-    - pip:
+    - name: pip
+      pip:
         name: docker
       tags:
         - setup
