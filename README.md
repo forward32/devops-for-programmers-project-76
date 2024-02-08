@@ -8,5 +8,6 @@
 - кластер Postgres на Digital Ocean
 
 ## Команды запуска
-- `make setup` - используя `ansible`, устанавливает `python docker`, необходимый далее
-- `make start` - используя `ansible`, запускает образ `redmine`, доступный по адресу https://forward32.online, а также устанавливает datadog-агент с настроенными http-чеком.
+- `make setup_only` - используя `ansible`, устанавливает `python docker`, необходимый далее
+- `make redmine_only` - используя `ansible`, запускает образ `redmine`, доступный по адресу https://forward32.online
+- `make all` - выполняет предыдущие два, а также устанавливает datadog-агент с настроенными http-чеком.
