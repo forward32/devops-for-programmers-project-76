@@ -18,17 +18,17 @@
         name: docker
       tags:
         - setup
+    - name: create .env
+      ansible.builtin.template:
+        src: env.template
+        dest: .env
+        mode: '0644'
     - name: start redmine container
       community.docker.docker_container:
         name: redmine
         image: redmine
         published_ports: 3000:3000
-        env:
-          REDMINE_DB_POSTGRES: "{{ redmine_db_postgres }}"
-          REDMINE_DB_PORT: "{{ redmine_db_port }}"
-          REDMINE_DB_USERNAME: "{{ redmine_db_username }}"
-          REDMINE_DB_DATABASE: "{{ redmine_db_database }}"
-          REDMINE_DB_PASSWORD: "{{ redmine_db_password }}"
+        env_file: .env
       become: yes
 
 - hosts: webservers
@@ -37,3 +37,5 @@
       import_role:
         name: datadog.datadog
       become: yes
+      tags:
+        - datadog
